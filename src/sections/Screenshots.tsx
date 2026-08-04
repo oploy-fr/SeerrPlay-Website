@@ -48,7 +48,8 @@ export function Screenshots() {
           {rows.map((row, i) => {
             const Icon = ROW_ICONS[i];
             const imageName = ROW_IMAGES[i];
-            const isPhone = i < 3; // mobile, requests, player → phone frame
+            const isPhone = i < 2; // mobile, requests → phone frame
+            const isPlayer = i === 2; // built-in player → landscape 16:9 frame
             return (
               <div
                 key={row.title}
@@ -86,7 +87,9 @@ export function Screenshots() {
                         onError={fallbackToEnglish}
                         alt={row.alt}
                         loading="lazy"
-                        className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                        className={`w-full object-cover transition-transform duration-700 group-hover:scale-[1.03] ${
+                          isPlayer ? "aspect-video" : "aspect-[4/3]"
+                        }`}
                       />
                       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-seerr-night/40 via-transparent to-transparent" />
                     </div>
