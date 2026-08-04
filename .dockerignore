@@ -1,0 +1,9 @@
+.git
+.github
+.claude
+node_modules
+dist
+logo-pack
+SeerPlay Website
+*.local
+.DS_Store
