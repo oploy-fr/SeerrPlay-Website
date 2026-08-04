@@ -8,4 +8,4 @@ resources:
   - ingress.yaml
 images:
   - name: ghcr.io/oploy-fr/seerrplay-website
-    newTag: sha-ae2c684ac61e5d7b0d38868078e131c61c374f2f
+    newTag: sha-68051cf2e6d4aa5f7cc367b232059b49a7b55709
