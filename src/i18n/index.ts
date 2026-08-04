@@ -27,7 +27,9 @@ void i18n
     interpolation: { escapeValue: false },
     returnObjects: true,
     detection: {
-      order: ["localStorage", "navigator"],
+      // Anglais par défaut : seul un choix explicite (sélecteur ou bannière
+      // géolocalisée) est mémorisé ici. La langue du navigateur ne force rien.
+      order: ["localStorage"],
       caches: ["localStorage"],
       lookupLocalStorage: "seerrplay-lang",
     },

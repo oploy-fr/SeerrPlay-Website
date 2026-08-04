@@ -89,8 +89,10 @@ npm run lint     # ESLint
 ## 🌍 Internationalisation
 
 Le site est traduit en **5 langues** : anglais (défaut), français, espagnol, allemand
-et italien. La langue est détectée automatiquement (navigateur) et mémorisée ; le
-sélecteur 🌐 dans la barre de navigation permet de changer à la volée.
+et italien. La page s'affiche en anglais par défaut ; une **bannière de suggestion
+basée sur la géolocalisation IP** propose la langue du pays du visiteur quand elle
+est disponible (« Parlez-vous français ? »), et le sélecteur 🌐 dans la barre de
+navigation permet de changer à la volée. Tout choix est mémorisé.
 
 - **Textes** : [`src/i18n/locales/`](src/i18n/locales/) — un fichier par langue (`en.ts`, `fr.ts`, `es.ts`, `de.ts`, `it.ts`)
 - **Captures localisées** : `public/images/screenshots/<lang>/` — déposez les captures traduites (`mobile.jpg`, `request.jpg`, `player.jpg`, `tv.jpg`, `devices.jpg`) dans chaque dossier de langue ; si une image manque, la version anglaise prend le relais automatiquement.

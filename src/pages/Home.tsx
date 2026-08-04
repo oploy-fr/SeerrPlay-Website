@@ -8,6 +8,7 @@ import { OpenSource } from "@/sections/OpenSource";
 import { Download } from "@/sections/Download";
 import { Faq } from "@/sections/Faq";
 import { Footer } from "@/sections/Footer";
+import { GeoLanguagePrompt } from "@/components/GeoLanguagePrompt";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         <Faq />
       </main>
       <Footer />
+      <GeoLanguagePrompt />
     </div>
   );
 }
