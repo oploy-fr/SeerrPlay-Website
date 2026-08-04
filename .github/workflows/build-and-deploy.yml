@@ -43,6 +43,14 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Publish GHCR package
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api --method PATCH \
+            /orgs/oploy-fr/packages/container/seerrplay-website \
+            -f visibility=public
+
       - name: Pin deployed image revision
         env:
           IMAGE_TAG: sha-${{ github.sha }}
