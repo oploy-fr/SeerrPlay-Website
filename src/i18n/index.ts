@@ -27,15 +27,15 @@ void i18n
     interpolation: { escapeValue: false },
     returnObjects: true,
     detection: {
-      // Anglais par défaut : seul un choix explicite (sélecteur ou bannière
-      // géolocalisée) est mémorisé ici. La langue du navigateur ne force rien.
+      // English by default: only an explicit choice (switcher or geolocated
+      // banner) is stored here. The browser language never forces anything.
       order: ["localStorage"],
       caches: ["localStorage"],
       lookupLocalStorage: "seerrplay-lang",
     },
   });
 
-/** Langue active normalisée (ex. "fr-CA" → "fr"), avec repli sur l'anglais. */
+/** Normalized active language (e.g. "fr-CA" → "fr"), falling back to English. */
 export function currentLanguage(): Language {
   const lng = (i18n.resolvedLanguage || i18n.language || "en").slice(0, 2);
   return (SUPPORTED_LANGUAGES as readonly string[]).includes(lng) ? (lng as Language) : "en";

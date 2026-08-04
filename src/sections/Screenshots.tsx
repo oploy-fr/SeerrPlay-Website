@@ -12,7 +12,7 @@ interface RowItem {
   alt: string;
 }
 
-/** Repli vers la capture anglaise si la version localisée n'existe pas encore. */
+/** Falls back to the English screenshot when the localized version doesn't exist yet. */
 function fallbackToEnglish(e: React.SyntheticEvent<HTMLImageElement>) {
   const img = e.currentTarget;
   if (img.dataset.fallbackApplied) return;
@@ -48,6 +48,7 @@ export function Screenshots() {
           {rows.map((row, i) => {
             const Icon = ROW_ICONS[i];
             const imageName = ROW_IMAGES[i];
+            const isPhone = i < 3; // mobile, requests, player → phone frame
             return (
               <div
                 key={row.title}
@@ -55,7 +56,7 @@ export function Screenshots() {
                   i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
                 }`}
               >
-                {/* Visuel encadré avec halo */}
+                {/* Framed visual with halo */}
                 <div className="group relative">
                   <div
                     className={`pointer-events-none absolute -inset-6 rounded-[2rem] blur-3xl transition-opacity duration-500 ${
@@ -63,20 +64,36 @@ export function Screenshots() {
                     } opacity-60 group-hover:opacity-100`}
                     aria-hidden="true"
                   />
-                  <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-glow-sm ring-1 ring-white/5 transition-all duration-500 group-hover:border-seerr-400/40">
-                    <img
-                      src={localizedScreenshot(imageName)}
-                      data-name={imageName}
-                      onError={fallbackToEnglish}
-                      alt={row.alt}
-                      loading="lazy"
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-seerr-night/40 via-transparent to-transparent" />
-                  </div>
+                  {isPhone ? (
+                    <div className="relative mx-auto w-full max-w-[290px]">
+                      {/* Phone frame */}
+                      <div className="relative overflow-hidden rounded-[2.6rem] border border-white/15 bg-seerr-night p-[10px] shadow-glow ring-1 ring-white/10 transition-all duration-500 group-hover:border-seerr-400/40">
+                        <img
+                          src={localizedScreenshot(imageName)}
+                          data-name={imageName}
+                          onError={fallbackToEnglish}
+                          alt={row.alt}
+                          loading="lazy"
+                          className="w-full rounded-[2rem] transition-transform duration-700 group-hover:scale-[1.02]"
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="relative overflow-hidden rounded-2xl border border-white/10 shadow-glow-sm ring-1 ring-white/5 transition-all duration-500 group-hover:border-seerr-400/40">
+                      <img
+                        src={localizedScreenshot(imageName)}
+                        data-name={imageName}
+                        onError={fallbackToEnglish}
+                        alt={row.alt}
+                        loading="lazy"
+                        className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-seerr-night/40 via-transparent to-transparent" />
+                    </div>
+                  )}
                 </div>
 
-                {/* Texte */}
+                {/* Text */}
                 <div className="lg:max-w-lg">
                   <span className="inline-flex items-center gap-2 rounded-full border border-seerr-400/30 bg-seerr-500/10 px-4 py-1.5 text-sm font-medium text-seerr-200">
                     <Icon className="h-4 w-4 text-seerr-300" />
@@ -94,7 +111,7 @@ export function Screenshots() {
           })}
         </div>
 
-        {/* Bannière finale multi-appareils */}
+        {/* Final multi-device banner */}
         <div className="group relative mt-20 lg:mt-28">
           <div
             className="pointer-events-none absolute -inset-8 rounded-[2.5rem] bg-seerr-500/15 blur-3xl"

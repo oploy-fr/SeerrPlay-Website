@@ -10,23 +10,23 @@ export function Hero() {
 
   return (
     <section id="hero" className="relative flex min-h-svh flex-col overflow-hidden">
-      {/* Fond cinématique : l'image devient l'expérience */}
+      {/* Cinematic background: the image becomes the experience */}
       <div className="absolute inset-0" aria-hidden="true">
         <img
           src="/images/hero-bg.jpg"
           alt=""
           className="h-full w-full origin-center object-cover animate-ken-burns"
         />
-        {/* Voiles pour fondre l'image dans le thème */}
+        {/* Veils to blend the image into the theme */}
         <div className="absolute inset-0 bg-seerr-night/55" />
         <div className="absolute inset-0 bg-gradient-to-b from-seerr-night/85 via-seerr-night/30 to-seerr-night" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_55%_at_50%_42%,transparent_0%,rgba(7,11,22,0.75)_100%)]" />
-        {/* Halos de couleur signature */}
+        {/* Signature color halos */}
         <div className="absolute -left-32 top-1/4 h-96 w-96 rounded-full bg-seerr-500/30 blur-[130px]" />
         <div className="absolute -right-32 top-1/3 h-96 w-96 rounded-full bg-seerr-purple/25 blur-[130px]" />
       </div>
 
-      {/* Contenu */}
+      {/* Content */}
       <div className="relative flex flex-1 items-center justify-center px-4 pb-24 pt-32 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-4xl text-center">
           <a
@@ -78,7 +78,7 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Indicateur de scroll */}
+      {/* Scroll indicator */}
       <a
         href="#problem"
         aria-label={t("hero.scrollAria")}

@@ -6,10 +6,10 @@
   <img alt="SeerrPlay" src="public/logo/primary-light.svg" width="420">
 </picture>
 
-**Le site officiel de SeerrPlay — l'application mobile & TV compagnon de [Seerr](https://seerr.dev/)**
+**The official SeerrPlay website — the mobile & TV companion app for [Seerr](https://seerr.dev/)**
 
-Découvrez, demandez et **regardez** vos films et séries directement dans l'app,
-que votre serveur soit **Jellyfin**, **Plex** ou **Emby**.
+Discover, request and **watch** your movies and shows right inside the app,
+whether your server runs **Jellyfin**, **Plex** or **Emby**.
 
 [![Open Source](https://img.shields.io/badge/Open%20Source-%E2%9D%A4-7B3DE5)](https://github.com/oploy-fr/SeerrPlay)
 [![React](https://img.shields.io/badge/React%2019-61DAFB?logo=react&logoColor=white)](https://react.dev/)
@@ -17,120 +17,123 @@ que votre serveur soit **Jellyfin**, **Plex** ou **Emby**.
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%203-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
-[Application](https://github.com/oploy-fr/SeerrPlay) · [Discord](https://discord.gg/GMunyuG3wg) · [Seerr](https://seerr.dev/)
+[App](https://github.com/oploy-fr/SeerrPlay) · [Discord](https://discord.gg/GMunyuG3wg) · [Seerr](https://seerr.dev/)
 
 </div>
 
 ---
 
-## 📱 À propos
+## 📱 About
 
-Ce dépôt contient le **site vitrine** de SeerrPlay — la page de présentation et de
-téléchargement de l'application. L'application elle-même (mobile & TV) vit dans le
-dépôt [`oploy-fr/SeerrPlay`](https://github.com/oploy-fr/SeerrPlay).
+This repository contains the **showcase website** for SeerrPlay — the app's
+presentation and download page. The app itself (mobile & TV) lives in the
+[`oploy-fr/SeerrPlay`](https://github.com/oploy-fr/SeerrPlay) repository.
 
-SeerrPlay résout un problème simple de l'écosystème Seerr : il fallait jusqu'ici
-jongler entre le site web Seerr pour les demandes, un lecteur vidéo sur le web, une
-autre app sur le téléphone et encore une autre sur la TV. SeerrPlay réunit tout ça :
+SeerrPlay solves a simple problem in the Seerr ecosystem: until now you had to
+juggle the Seerr website for requests, a video player on the web, another app on
+your phone and yet another one on your TV. SeerrPlay brings it all together:
 
-- 🎬 **Découverte & demandes** — tout le catalogue Seerr, films et séries
-- ▶️ **Lecture intégrée** — directement dans l'app, via Jellyfin, Plex ou Emby
-- 📥 **Téléchargements hors ligne** — dans l'avion, le métro, les zones blanches
-- 🖥️ **Multi-plateformes** — iPhone, iPad, Mac, Apple TV, Android (téléphone, tablette, TV)… Windows bientôt
-- 💜 **Gratuit & open source** — comme Seerr
+- 🎬 **Discovery & requests** — the full Seerr catalog, movies and shows
+- ▶️ **Built-in playback** — right inside the app, via Jellyfin, Plex or Emby
+- 📥 **Offline downloads** — on a plane, in the subway, in dead zones
+- 🖥️ **Multi-platform** — iPhone, iPad, Mac, Apple TV, Android (phone, tablet, TV)… Windows soon
+- 💜 **Free & open source** — like Seerr
 
-## ✨ Le site
+## ✨ The website
 
-- **Dark theme** aux couleurs de [seerr.dev](https://seerr.dev/) (violet `#7B3DE5`, fond nuit)
-- Storytelling « problème → solution » : le chaos des apps multiples, puis la réponse
-- Badges App Store / Google Play, bouton Discord, lien GitHub
-- Pages **Privacy policy** et **Support** (obligatoires pour les stores)
-- 100 % responsive, animations douces, aucun backend — site statique
+- **Dark theme** matching [seerr.dev](https://seerr.dev/) colors (purple `#7B3DE5`, night background)
+- "Problem → solution" storytelling: the multi-app chaos, then the answer
+- App Store / Google Play badges, Discord button, GitHub link
+- **Privacy policy** and **Support** pages (required by the stores)
+- Fully responsive, smooth animations, no backend — static site
 
-## 🚀 Démarrage rapide
+## 🌍 Internationalization
+
+The website is translated into **5 languages**: English (default), French, Spanish,
+German and Italian. Pages render in English by default; a **suggestion banner based
+on IP geolocation** offers the visitor's country language when available
+("Parlez-vous français ?"), and the 🌐 switcher in the navbar allows switching at
+any time. Every choice is remembered.
+
+- **Copy**: [`src/i18n/locales/`](src/i18n/locales/) — one file per language (`en.ts`, `fr.ts`, `es.ts`, `de.ts`, `it.ts`)
+- **Localized screenshots**: `public/images/screenshots/<lang>/` — drop the translated screenshots (`mobile.jpg`, `request.jpg`, `player.jpg`, `tv.jpg`, `devices.jpg`) into each language folder; if an image is missing, the English version takes over automatically.
+
+## 🚀 Quick start
 
 ```bash
 npm install
 npm run dev
 ```
 
-Le site est accessible sur `http://localhost:5173`.
+The site is available at `http://localhost:5173`.
 
-### Autres commandes
+### Other commands
 
 ```bash
-npm run build    # build de production dans dist/
-npm run preview  # sert le build de production en local
+npm run build    # production build to dist/
+npm run preview  # serve the production build locally
 npm run lint     # ESLint
 ```
 
-## 🗂️ Structure du projet
+## 🗂️ Project structure
 
 ```
-├── index.html              # Point d'entrée (meta, favicons, manifest)
+├── index.html              # Entry point (meta, favicons, manifest)
 ├── public/
-│   ├── logo/               # Logos SVG officiels (primaire, icône, variantes)
+│   ├── logo/               # Official SVG logos (primary, icon, variants)
 │   ├── icons/              # Favicons, apple-touch-icon, maskable, app-icon
-│   ├── images/             # Visuels du site
-│   ├── privacy.html        # Privacy policy (page statique, requise par les stores)
-│   ├── support.html        # Page support (page statique)
-│   └── styles.css          # Styles des pages statiques
+│   ├── images/             # Site visuals (+ screenshots/<lang>/ localized)
+│   ├── privacy.html        # Privacy policy (static page, required by stores)
+│   ├── support.html        # Support page (static)
+│   └── styles.css          # Styles for the static pages
 ├── src/
-│   ├── site.ts             # 🔗 Tous les liens centralisés (stores, GitHub, Discord…)
+│   ├── site.ts             # 🔗 All links centralized (stores, GitHub, Discord…)
+│   ├── i18n/               # i18next config + locales (en, fr, es, de, it)
 │   ├── sections/           # Hero, Problem, HowItWorks, Screenshots, Features,
 │   │                       # OpenSource, Download, Faq, Footer…
-│   └── components/         # StoreBadge, DiscordIcon, ui/ (shadcn)
-└── logo-pack/              # Sources du logo (SVG, PNG, PSD, AI)
+│   └── components/         # StoreBadge, DiscordIcon, LanguageSwitcher, ui/ (shadcn)
+├── app-assets/             # iOS screenshots + App Store previews (1284×2778, 1242×2688)
+└── logo-pack/              # Logo source files (SVG, PNG, PSD, AI)
 ```
 
-> **💡 Modifier un lien ?** Tout passe par [`src/site.ts`](src/site.ts) —
-> URLs des stores, GitHub, Discord, serveurs… un seul fichier à éditer.
+> **💡 Change a link?** Everything goes through [`src/site.ts`](src/site.ts) —
+> store URLs, GitHub, Discord, servers… a single file to edit.
 
-## 🌍 Internationalisation
-
-Le site est traduit en **5 langues** : anglais (défaut), français, espagnol, allemand
-et italien. La page s'affiche en anglais par défaut ; une **bannière de suggestion
-basée sur la géolocalisation IP** propose la langue du pays du visiteur quand elle
-est disponible (« Parlez-vous français ? »), et le sélecteur 🌐 dans la barre de
-navigation permet de changer à la volée. Tout choix est mémorisé.
-
-- **Textes** : [`src/i18n/locales/`](src/i18n/locales/) — un fichier par langue (`en.ts`, `fr.ts`, `es.ts`, `de.ts`, `it.ts`)
-- **Captures localisées** : `public/images/screenshots/<lang>/` — déposez les captures traduites (`mobile.jpg`, `request.jpg`, `player.jpg`, `tv.jpg`, `devices.jpg`) dans chaque dossier de langue ; si une image manque, la version anglaise prend le relais automatiquement.
-
-## 🛠️ Stack technique
+## 🛠️ Tech stack
 
 - **React 19** + **TypeScript**
 - **Vite 7** — dev server & build
-- **Tailwind CSS 3** — design tokens personnalisés (palette Seerr)
-- **lucide-react** — icônes
-- **shadcn/ui** — primitives de composants
+- **Tailwind CSS 3** — custom design tokens (Seerr palette)
+- **i18next** + **react-i18next** — internationalization
+- **lucide-react** — icons
+- **shadcn/ui** — component primitives
 
-## 🎨 Identité visuelle
+## 🎨 Brand identity
 
-| Rôle | Couleur |
+| Role | Color |
 |---|---|
-| Violet principal | `#7B3DE5` → `#532BC2` (dégradé) |
-| Violet Play | `#6F3AE3` |
-| Navy (texte sur fond clair) | `#261452` |
-| Fond nuit | `#070b16` |
+| Primary purple | `#7B3DE5` → `#532BC2` (gradient) |
+| Play purple | `#6F3AE3` |
+| Navy (text on light background) | `#261452` |
+| Night background | `#070b16` |
 
-Les logos officiels sont dans [`public/logo/`](public/logo/) ; les sources
-complètes (favicons, kit réseaux sociaux, fichiers PSD/AI) dans [`logo-pack/`](logo-pack/).
+Official logos live in [`public/logo/`](public/logo/); full source files
+(favicons, social media kit, PSD/AI files) in [`logo-pack/`](logo-pack/).
 
-## 🤝 Contribuer
+## 🤝 Contributing
 
-Les contributions sont les bienvenues !
+Contributions are welcome!
 
-1. Forkez le dépôt
-2. Créez une branche (`git checkout -b feature/ma-feature`)
-3. Commitez (`git commit -m "feat: ma feature"`)
-4. Poussez et ouvrez une Pull Request
+1. Fork the repository
+2. Create a branch (`git checkout -b feature/my-feature`)
+3. Commit (`git commit -m "feat: my feature"`)
+4. Push and open a Pull Request
 
-Pour l'application elle-même, rendez-vous sur
+For the app itself, head over to
 [`oploy-fr/SeerrPlay`](https://github.com/oploy-fr/SeerrPlay).
 
 ---
 
 <div align="center">
-  <sub>Basé sur le projet open source <a href="https://seerr.dev/">Seerr</a> — fait avec 💜 par la communauté.</sub>
+  <sub>Based on the open source project <a href="https://seerr.dev/">Seerr</a> — made with 💜 by the community.</sub>
 </div>

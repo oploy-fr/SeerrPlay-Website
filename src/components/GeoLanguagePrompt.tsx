@@ -3,7 +3,7 @@ import { Globe, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { SUPPORTED_LANGUAGES, currentLanguage, type Language } from "@/i18n";
 
-/** Pays → langue du site à proposer (l'anglais reste le défaut, jamais proposé). */
+/** Country → site language to suggest (English stays the default, never suggested). */
 const COUNTRY_TO_LANGUAGE: Record<string, Language> = Object.fromEntries(
   (
     [
@@ -15,7 +15,7 @@ const COUNTRY_TO_LANGUAGE: Record<string, Language> = Object.fromEntries(
   ).flatMap(([lng, countries]) => countries.map((c) => [c, lng]))
 );
 
-/** Textes de la bannière, dans la langue proposée + refus en anglais. */
+/** Banner copy, in the suggested language + decline button in English. */
 const PROMPTS: Record<Exclude<Language, "en">, { flag: string; question: string; accept: string; decline: string }> = {
   fr: { flag: "🇫🇷", question: "Parlez-vous français ?", accept: "Oui, passer au français", decline: "No, I don't speak French" },
   es: { flag: "🇪🇸", question: "¿Hablas español?", accept: "Sí, cambiar a español", decline: "No, I don't speak Spanish" },
@@ -41,17 +41,17 @@ async function detectCountry(): Promise<string | null> {
 }
 
 /**
- * Bannière de suggestion de langue basée sur la géolocalisation IP.
- * Ne s'affiche que si l'utilisateur n'a jamais choisi de langue, que le site
- * est en anglais et que son pays parle une langue disponible (≠ anglais).
+ * Language suggestion banner based on IP geolocation.
+ * Only shown when the user has never picked a language, the site is displayed
+ * in English, and their country speaks an available language (≠ English).
  */
 export function GeoLanguagePrompt() {
   const { i18n } = useTranslation();
   const [suggested, setSuggested] = useState<Exclude<Language, "en"> | null>(null);
 
   useEffect(() => {
-    // Choix explicite déjà mémorisé, bannière déjà refusée, ou site déjà
-    // affiché dans une langue non anglaise → rien à proposer.
+    // Explicit choice already stored, banner already dismissed, or site already
+    // displayed in a non-English language → nothing to suggest.
     if (localStorage.getItem("seerrplay-lang")) return;
     if (localStorage.getItem(DISMISS_KEY)) return;
     if (currentLanguage() !== "en") return;
@@ -77,7 +77,7 @@ export function GeoLanguagePrompt() {
   const prompt = PROMPTS[suggested];
 
   const accept = () => {
-    void i18n.changeLanguage(suggested); // mémorisé via le detector
+    void i18n.changeLanguage(suggested); // persisted via the detector
     setSuggested(null);
   };
 
