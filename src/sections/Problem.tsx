@@ -55,7 +55,7 @@ export function Problem() {
         {/* Before / After */}
         <div className="mx-auto mt-14 grid max-w-5xl items-stretch gap-6 lg:mt-20 lg:grid-cols-[1fr_auto_1fr]">
           {/* BEFORE */}
-          <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
+          <div className="min-w-0 rounded-2xl border border-white/10 bg-white/[0.03] p-6 sm:p-8">
             <p className="text-sm font-bold uppercase tracking-widest text-red-400/80">
               {t("problem.todayLabel")}
             </p>
@@ -85,14 +85,14 @@ export function Problem() {
           </div>
 
           {/* Transition arrow */}
-          <div className="flex items-center justify-center lg:flex-col">
+          <div className="flex min-w-0 items-center justify-center lg:flex-col">
             <span className="flex h-12 w-12 rotate-0 items-center justify-center rounded-full bg-gradient-to-br from-seerr-500 to-seerr-purple shadow-glow-sm lg:rotate-0">
               <ArrowDown className="h-5 w-5 text-white lg:-rotate-90" />
             </span>
           </div>
 
           {/* AFTER */}
-          <div className="relative overflow-hidden rounded-2xl border border-seerr-400/40 bg-gradient-to-br from-seerr-500/15 via-seerr-panel to-seerr-purple/10 p-6 shadow-glow-sm sm:p-8">
+          <div className="relative min-w-0 overflow-hidden rounded-2xl border border-seerr-400/40 bg-gradient-to-br from-seerr-500/15 via-seerr-panel to-seerr-purple/10 p-6 shadow-glow-sm sm:p-8">
             <div
               className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-seerr-purple/25 blur-[80px]"
               aria-hidden="true"
