@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 import { Github, Menu, X } from "lucide-react";
+import { useTranslation } from "react-i18next";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { GITHUB_URL } from "@/site";
 import { cn } from "@/lib/utils";
 
-const NAV_LINKS = [
-  { label: "Pourquoi ?", href: "#problem" },
-  { label: "La solution", href: "#screenshots" },
-  { label: "Fonctionnalités", href: "#features" },
-  { label: "Open Source", href: "#opensource" },
-  { label: "FAQ", href: "#faq" },
-];
-
 export function Navbar() {
+  const { t } = useTranslation();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+
+  const NAV_LINKS = [
+    { label: t("nav.problem"), href: "#problem" },
+    { label: t("nav.solution"), href: "#screenshots" },
+    { label: t("nav.features"), href: "#features" },
+    { label: t("nav.opensource"), href: "#opensource" },
+    { label: t("nav.faq"), href: "#faq" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -32,7 +35,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#" className="flex items-center" aria-label="SeerrPlay — accueil">
+        <a href="#" className="flex items-center" aria-label={t("nav.home")}>
           <img
             src="/logo/primary.svg"
             alt="SeerrPlay"
@@ -40,7 +43,7 @@ export function Navbar() {
           />
         </a>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-1 lg:flex">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
@@ -52,7 +55,8 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden items-center gap-3 lg:flex">
+          <LanguageSwitcher />
           <a
             href={GITHUB_URL}
             target="_blank"
@@ -60,27 +64,30 @@ export function Navbar() {
             className="inline-flex items-center gap-2 rounded-lg border border-white/15 px-3.5 py-2 text-sm font-medium text-white/80 transition-all hover:border-white/30 hover:bg-white/5 hover:text-white"
           >
             <Github className="h-4 w-4" />
-            GitHub
+            {t("nav.github")}
           </a>
           <a
             href="#download"
             className="inline-flex items-center rounded-lg bg-gradient-to-r from-seerr-500 to-seerr-purple px-4 py-2 text-sm font-semibold text-white shadow-glow-sm transition-all hover:brightness-110"
           >
-            Télécharger
+            {t("nav.download")}
           </a>
         </div>
 
-        <button
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-white/80 hover:bg-white/5 md:hidden"
-          onClick={() => setOpen((v) => !v)}
-          aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
-        >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <LanguageSwitcher />
+          <button
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-white/80 hover:bg-white/5"
+            onClick={() => setOpen((v) => !v)}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
+          >
+            {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          </button>
+        </div>
       </nav>
 
       {open && (
-        <div className="border-t border-white/10 bg-seerr-night/95 px-4 pb-6 pt-3 backdrop-blur-xl md:hidden">
+        <div className="border-t border-white/10 bg-seerr-night/95 px-4 pb-6 pt-3 backdrop-blur-xl lg:hidden">
           <div className="flex flex-col gap-1">
             {NAV_LINKS.map((link) => (
               <a
@@ -100,14 +107,14 @@ export function Navbar() {
                 className="inline-flex flex-1 items-center justify-center gap-2 rounded-lg border border-white/15 px-4 py-3 text-sm font-medium text-white"
               >
                 <Github className="h-4 w-4" />
-                GitHub
+                {t("nav.github")}
               </a>
               <a
                 href="#download"
                 onClick={() => setOpen(false)}
                 className="inline-flex flex-1 items-center justify-center rounded-lg bg-gradient-to-r from-seerr-500 to-seerr-purple px-4 py-3 text-sm font-semibold text-white"
               >
-                Télécharger
+                {t("nav.download")}
               </a>
             </div>
           </div>

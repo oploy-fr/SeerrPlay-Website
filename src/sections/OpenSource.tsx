@@ -1,25 +1,18 @@
 import { Code2, GitFork, Github, Heart, Star } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { GITHUB_URL, SEERR_URL } from "@/site";
 
-const POINTS = [
-  {
-    icon: Code2,
-    title: "Code 100 % ouvert",
-    description: "Chaque ligne est publique : auditez, apprenez, adaptez.",
-  },
-  {
-    icon: GitFork,
-    title: "Contributions bienvenues",
-    description: "Issues, traductions, pull requests — le projet vit grâce à vous.",
-  },
-  {
-    icon: Heart,
-    title: "Gratuit, pour toujours",
-    description: "Pas d'abonnement, pas de compte tiers, pas de publicité.",
-  },
-];
+const POINT_ICONS = [Code2, GitFork, Heart];
+
+interface PointItem {
+  title: string;
+  description: string;
+}
 
 export function OpenSource() {
+  const { t } = useTranslation();
+  const points = t("opensource.points", { returnObjects: true }) as PointItem[];
+
   return (
     <section id="opensource" className="relative py-24 sm:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -37,13 +30,13 @@ export function OpenSource() {
             <div>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-sm font-medium text-seerr-200">
                 <Github className="h-4 w-4" />
-                Open source
+                {t("opensource.badge")}
               </span>
               <h2 className="mt-5 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Libre par conviction, <span className="text-gradient">comme Seerr</span>
+                {t("opensource.titleA")} <span className="text-gradient">{t("opensource.titleB")}</span>
               </h2>
               <p className="mt-4 leading-relaxed text-white/60">
-                SeerrPlay est un projet communautaire construit sur les épaules de{" "}
+                {t("opensource.text1")}{" "}
                 <a
                   href={SEERR_URL}
                   target="_blank"
@@ -52,8 +45,7 @@ export function OpenSource() {
                 >
                   Seerr
                 </a>
-                , l'application open source de gestion de requêtes née d'Overseerr et
-                Jellyseerr. Le code est ouvert, les idées aussi.
+                {t("opensource.text2")}
               </p>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
@@ -63,7 +55,7 @@ export function OpenSource() {
                   className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold text-seerr-night transition-all hover:bg-seerr-100"
                 >
                   <Star className="h-4 w-4" />
-                  Star sur GitHub
+                  {t("opensource.star")}
                 </a>
                 <a
                   href={`${GITHUB_URL}/blob/main/CONTRIBUTING.md`}
@@ -72,28 +64,31 @@ export function OpenSource() {
                   className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-5 py-3 text-sm font-semibold text-white transition-all hover:border-white/40 hover:bg-white/5"
                 >
                   <GitFork className="h-4 w-4" />
-                  Contribuer
+                  {t("opensource.contribute")}
                 </a>
               </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-1">
-              {POINTS.map((point) => (
-                <div
-                  key={point.title}
-                  className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-seerr-500 to-seerr-purple">
-                    <point.icon className="h-5 w-5 text-white" />
-                  </span>
-                  <div>
-                    <h3 className="font-semibold text-white">{point.title}</h3>
-                    <p className="mt-1 text-sm leading-relaxed text-white/55">
-                      {point.description}
-                    </p>
+              {points.map((point, i) => {
+                const Icon = POINT_ICONS[i];
+                return (
+                  <div
+                    key={point.title}
+                    className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-seerr-500 to-seerr-purple">
+                      <Icon className="h-5 w-5 text-white" />
+                    </span>
+                    <div>
+                      <h3 className="font-semibold text-white">{point.title}</h3>
+                      <p className="mt-1 text-sm leading-relaxed text-white/55">
+                        {point.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

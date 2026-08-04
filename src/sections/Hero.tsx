@@ -1,10 +1,13 @@
 import { ChevronDown, Github, Sparkles } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { StoreBadge } from "@/components/StoreBadge";
 import { GITHUB_URL, STORE_LINKS } from "@/site";
 
 const COMPATIBLE = ["Jellyfin", "Plex", "Emby"];
 
 export function Hero() {
+  const { t } = useTranslation();
+
   return (
     <section id="hero" className="relative flex min-h-svh flex-col overflow-hidden">
       {/* Fond cinématique : l'image devient l'expérience */}
@@ -33,20 +36,20 @@ export function Hero() {
             className="group inline-flex items-center gap-2 rounded-full border border-seerr-300/40 bg-seerr-night/50 px-4 py-1.5 text-sm font-medium text-seerr-200 backdrop-blur-md transition-colors hover:border-seerr-300/70 hover:bg-seerr-500/20"
           >
             <Sparkles className="h-3.5 w-3.5 text-seerr-300" />
-            100 % Open Source &amp; Gratuit
+            {t("hero.badge")}
             <span className="text-seerr-300 transition-transform group-hover:translate-x-0.5">→</span>
           </a>
 
           <h1 className="mt-7 text-5xl font-extrabold leading-[1.04] tracking-tight text-white drop-shadow-2xl sm:text-7xl lg:text-8xl">
-            Vos films et séries,
+            {t("hero.titleA")}
             <br />
-            <span className="text-gradient">enfin réunis</span>
+            <span className="text-gradient">{t("hero.titleB")}</span>
           </h1>
 
           <p className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-white/75 drop-shadow-lg sm:text-xl">
-            Découvrez, demandez et <strong className="font-semibold text-white">regardez</strong> sans
-            jamais changer d'application. SeerrPlay connecte Seerr à votre serveur
-            Jellyfin, Plex ou Emby — sur mobile comme sur TV.
+            {t("hero.subtitle1")}{" "}
+            <strong className="font-semibold text-white">{t("hero.subtitleStrong")}</strong>{" "}
+            {t("hero.subtitle2")}
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -59,12 +62,12 @@ export function Hero() {
               className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-seerr-night/40 px-5 py-3.5 text-sm font-semibold text-white/90 backdrop-blur-md transition-all hover:border-white/45 hover:bg-white/10 hover:text-white"
             >
               <Github className="h-5 w-5" />
-              Voir sur GitHub
+              {t("hero.github")}
             </a>
           </div>
 
           <p className="mt-8 text-sm text-white/50">
-            Compatible avec{" "}
+            {t("hero.compatible")}{" "}
             {COMPATIBLE.map((s, i) => (
               <span key={s}>
                 <span className="font-semibold text-white/85">{s}</span>
@@ -78,10 +81,10 @@ export function Hero() {
       {/* Indicateur de scroll */}
       <a
         href="#problem"
-        aria-label="Découvrir pourquoi SeerrPlay existe"
+        aria-label={t("hero.scrollAria")}
         className="group relative mx-auto mb-8 flex flex-col items-center gap-1 text-white/50 transition-colors hover:text-white"
       >
-        <span className="text-xs font-medium uppercase tracking-[0.2em]">Pourquoi ?</span>
+        <span className="text-xs font-medium uppercase tracking-[0.2em]">{t("hero.scrollLabel")}</span>
         <ChevronDown className="h-5 w-5 animate-bounce" />
       </a>
     </section>

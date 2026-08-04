@@ -86,6 +86,15 @@ npm run lint     # ESLint
 > **💡 Modifier un lien ?** Tout passe par [`src/site.ts`](src/site.ts) —
 > URLs des stores, GitHub, Discord, serveurs… un seul fichier à éditer.
 
+## 🌍 Internationalisation
+
+Le site est traduit en **5 langues** : anglais (défaut), français, espagnol, allemand
+et italien. La langue est détectée automatiquement (navigateur) et mémorisée ; le
+sélecteur 🌐 dans la barre de navigation permet de changer à la volée.
+
+- **Textes** : [`src/i18n/locales/`](src/i18n/locales/) — un fichier par langue (`en.ts`, `fr.ts`, `es.ts`, `de.ts`, `it.ts`)
+- **Captures localisées** : `public/images/screenshots/<lang>/` — déposez les captures traduites (`mobile.jpg`, `request.jpg`, `player.jpg`, `tv.jpg`, `devices.jpg`) dans chaque dossier de langue ; si une image manque, la version anglaise prend le relais automatiquement.
+
 ## 🛠️ Stack technique
 
 - **React 19** + **TypeScript**

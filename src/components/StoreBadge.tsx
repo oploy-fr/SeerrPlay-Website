@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { cn } from "@/lib/utils";
 
 function AppleIcon({ className }: { className?: string }) {
@@ -27,6 +28,7 @@ interface StoreBadgeProps {
 }
 
 export function StoreBadge({ store, href, className, small }: StoreBadgeProps) {
+  const { t } = useTranslation();
   const isApple = store === "apple";
   return (
     <a
@@ -47,8 +49,7 @@ export function StoreBadge({ store, href, className, small }: StoreBadgeProps) {
       )}
       <span className="flex flex-col items-start leading-tight">
         <span className="text-[10px] uppercase tracking-wide text-white/60">
-          {isApple ? "Télécharger sur l'" : "Disponible sur "}
-          {isApple ? "App Store" : "Google Play"}
+          {isApple ? t("store.appleSmall") : t("store.googleSmall")}
         </span>
         <span className={cn("text-lg font-semibold text-white", small && "text-base")}>
           {isApple ? "App Store" : "Google Play"}

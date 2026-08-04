@@ -1,44 +1,7 @@
 import { Github, Twitter } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import { DiscordIcon } from "@/components/DiscordIcon";
 import { DISCORD_URL, GITHUB_URL, SEERR_URL, SERVER_LINKS, STORE_LINKS } from "@/site";
-
-const COLUMNS = [
-  {
-    title: "Produit",
-    links: [
-      { label: "Fonctionnalités", href: "#features" },
-      { label: "Aperçu", href: "#screenshots" },
-      { label: "Télécharger", href: "#download" },
-      { label: "FAQ", href: "#faq" },
-    ],
-  },
-  {
-    title: "Écosystème",
-    links: [
-      { label: "Seerr", href: SEERR_URL },
-      { label: "Jellyfin", href: SERVER_LINKS.jellyfin },
-      { label: "Plex", href: SERVER_LINKS.plex },
-      { label: "Emby", href: SERVER_LINKS.emby },
-    ],
-  },
-  {
-    title: "Open Source",
-    links: [
-      { label: "Dépôt GitHub", href: GITHUB_URL },
-      { label: "Signaler un bug", href: `${GITHUB_URL}/issues` },
-      { label: "Contribuer", href: `${GITHUB_URL}/blob/main/CONTRIBUTING.md` },
-      { label: "Versions", href: `${GITHUB_URL}/releases` },
-    ],
-  },
-  {
-    title: "Aide & Légal",
-    links: [
-      { label: "Support", href: "/support.html" },
-      { label: "Privacy policy", href: "/privacy.html" },
-      { label: "Discord", href: DISCORD_URL },
-    ],
-  },
-];
 
 const SOCIALS = [
   { icon: Github, href: GITHUB_URL, label: "GitHub" },
@@ -47,6 +10,46 @@ const SOCIALS = [
 ];
 
 export function Footer() {
+  const { t } = useTranslation();
+
+  const COLUMNS = [
+    {
+      title: t("footer.columns.product.title"),
+      links: [
+        { label: t("footer.columns.product.features"), href: "#features" },
+        { label: t("footer.columns.product.preview"), href: "#screenshots" },
+        { label: t("footer.columns.product.download"), href: "#download" },
+        { label: t("footer.columns.product.faq"), href: "#faq" },
+      ],
+    },
+    {
+      title: t("footer.columns.ecosystem.title"),
+      links: [
+        { label: "Seerr", href: SEERR_URL },
+        { label: "Jellyfin", href: SERVER_LINKS.jellyfin },
+        { label: "Plex", href: SERVER_LINKS.plex },
+        { label: "Emby", href: SERVER_LINKS.emby },
+      ],
+    },
+    {
+      title: t("footer.columns.opensource.title"),
+      links: [
+        { label: t("footer.columns.opensource.repo"), href: GITHUB_URL },
+        { label: t("footer.columns.opensource.bug"), href: `${GITHUB_URL}/issues` },
+        { label: t("footer.columns.opensource.contribute"), href: `${GITHUB_URL}/blob/main/CONTRIBUTING.md` },
+        { label: t("footer.columns.opensource.releases"), href: `${GITHUB_URL}/releases` },
+      ],
+    },
+    {
+      title: t("footer.columns.help.title"),
+      links: [
+        { label: t("footer.columns.help.support"), href: "/support.html" },
+        { label: t("footer.columns.help.privacy"), href: "/privacy.html" },
+        { label: "Discord", href: DISCORD_URL },
+      ],
+    },
+  ];
+
   return (
     <footer className="relative border-t border-white/10 bg-seerr-night">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -60,9 +63,7 @@ export function Footer() {
               />
             </a>
             <p className="mt-4 max-w-sm leading-relaxed text-white/50">
-              L'application mobile et TV qui réunit découverte, demandes et lecture
-              pour votre serveur Jellyfin, Plex ou Emby. Gratuite et open source,
-              comme Seerr.
+              {t("footer.description")}
             </p>
             <div className="mt-6 flex gap-3">
               {SOCIALS.map((social) => (
@@ -82,7 +83,7 @@ export function Footer() {
               href={STORE_LINKS.ios}
               className="mt-6 inline-block text-sm font-medium text-seerr-300 underline decoration-seerr-400/40 underline-offset-4 transition-colors hover:text-seerr-200"
             >
-              Télécharger l'application →
+              {t("footer.downloadLink")}
             </a>
           </div>
 
@@ -110,9 +111,9 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-sm text-white/40">© 2026 SeerrPlay. Tous droits réservés.</p>
+          <p className="text-sm text-white/40">{t("footer.copyright")}</p>
           <p className="text-sm text-white/40">
-            Basé sur le projet open source{" "}
+            {t("footer.basedOn")}{" "}
             <a
               href={SEERR_URL}
               target="_blank"
