@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SeerrPlay — Variantes du logo</title>
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
+    * { margin: 0; box-sizing: border-box; }
+    body {
+      background: #070b16;
+      color: #fff;
+      font-family: 'Inter', system-ui, sans-serif;
+      padding: 48px 24px 80px;
+      -webkit-font-smoothing: antialiased;
+    }
+    .wrap { max-width: 1100px; margin: 0 auto; }
+    h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    .grad {
+      background: linear-gradient(90deg, #a4b3ff, #7d87ff, #c07eff);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    p.sub { margin-top: 8px; color: rgba(255,255,255,.55); line-height: 1.6; }
+    .grid {
+      margin-top: 40px;
+      display: grid; gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+    .card {
+      background: #101828;
+      border: 1px solid #1e2939;
+      border-radius: 18px;
+      padding: 24px;
+      transition: border-color .25s, box-shadow .25s;
+    }
+    .card:hover {
+      border-color: rgba(125,135,255,.5);
+      box-shadow: 0 0 50px -12px rgba(98,95,255,.45);
+    }
+    .num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 9px;
+      background: linear-gradient(135deg, #625fff, #9810fa);
+      font-size: 14px; font-weight: 700;
+    }
+    .name { margin-left: 10px; font-size: 15px; font-weight: 600; color: rgba(255,255,255,.85); }
+    .preview {
+      margin-top: 18px;
+      background: #070b16;
+      border: 1px solid #1e2939;
+      border-radius: 12px;
+      padding: 22px 18px;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 96px;
+    }
+    .preview img { height: 56px; width: auto; }
+    .sizes {
+      margin-top: 14px;
+      display: flex; align-items: center; gap: 18px;
+      padding: 12px 14px;
+      background: #070b16;
+      border: 1px solid #1e2939;
+      border-radius: 12px;
+    }
+    .sizes img { width: auto; opacity: .95; }
+    .sizes .s1 { height: 32px; }
+    .sizes .s2 { height: 22px; }
+    .sizes .s3 { height: 15px; }
+    .sizes span { font-size: 11px; color: rgba(255,255,255,.35); margin-left: auto; }
+    .icons {
+      margin-top: 14px;
+      display: flex; align-items: flex-end; gap: 16px;
+      padding: 14px;
+      background: #070b16;
+      border: 1px solid #1e2939;
+      border-radius: 12px;
+    }
+    .appicon {
+      width: 60px; height: 60px;
+      border-radius: 22%;
+      background: #101828;
+      border: 1px solid #1e2939;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .appicon img { width: 82%; height: 82%; }
+    .icons .fav { display: flex; align-items: flex-end; gap: 12px; }
+    .icons .fav img { width: auto; }
+    .icons .f1 { height: 32px; }
+    .icons .f2 { height: 20px; }
+    .icons .f3 { height: 16px; }
+    .icons > span { font-size: 11px; color: rgba(255,255,255,.35); margin-left: auto; text-align: right; }
+    footer { margin-top: 48px; color: rgba(255,255,255,.4); font-size: 14px; line-height: 1.7; }
+    code { background: #1e2939; border-radius: 6px; padding: 2px 8px; color: #a4b3ff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Variantes du logo <span class="grad">SeerrPlay</span></h1>
+    <p class="sub">
+      Huit propositions avec le même texte « Seerr<strong>Play</strong> » et son dégradé indigo → violet.
+      Chaque variante est un fichier SVG autonome dans <code>public/logo/</code>.
+      Dites-moi simplement le numéro de votre préférée et je l'applique au site (menu, footer, favicon).
+    </p>
+
+    <div class="grid" id="grid"></div>
+
+    <footer>
+      Les SVG utilisent la police Inter ; si elle n'est pas installée sur la machine qui les affiche,
+      une police sans-serif équivalente sera utilisée. Pour un usage print/app store, je peux aussi
+      vectoriser le texte en contours (outlines) une fois votre choix fait.
+    </footer>
+  </div>
+
+  <script>
+    const variants = [
+      ['variant-1-badge-carre.svg', 'Badge carré arrondi'],
+      ['variant-2-cercle.svg', 'Cercle'],
+      ['variant-3-triangle-nu.svg', 'Triangle nu'],
+      ['variant-4-ecran-tv.svg', 'Écran TV'],
+      ['variant-5-monogramme-s.svg', 'Monogramme « S »'],
+      ['variant-6-clap-cinema.svg', 'Clap de cinéma'],
+      ['variant-7-anneau.svg', 'Anneau'],
+      ['variant-8-play-integre.svg', 'Play intégré au texte'],
+    ];
+    const grid = document.getElementById('grid');
+    variants.forEach(([file, name], i) => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div><span class="num">${i + 1}</span><span class="name">${name}</span></div>
+        <div class="preview"><img src="/logo/${file}" alt="Variante ${i + 1} — ${name}" /></div>
+        <div class="sizes">
+          <img class="s1" src="/logo/${file}" alt="" />
+          <img class="s2" src="/logo/${file}" alt="" />
+          <img class="s3" src="/logo/${file}" alt="" />
+          <span>tailles menu / petites</span>
+        </div>
+        <div class="icons">
+          <div class="appicon"><img src="/logo/icon-${i + 1}.svg" alt="Icône app — variante ${i + 1}" /></div>
+          <div class="fav">
+            <img class="f1" src="/logo/icon-${i + 1}.svg" alt="" />
+            <img class="f2" src="/logo/icon-${i + 1}.svg" alt="" />
+            <img class="f3" src="/logo/icon-${i + 1}.svg" alt="" />
+          </div>
+          <span>icône app<br/>+ favicons</span>
+        </div>`;
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>

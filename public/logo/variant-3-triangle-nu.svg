@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 88" width="340" height="88">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#625fff"/>
+      <stop offset="1" stop-color="#9810fa"/>
+    </linearGradient>
+    <linearGradient id="tg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a4b3ff"/>
+      <stop offset="0.5" stop-color="#7d87ff"/>
+      <stop offset="1" stop-color="#c07eff"/>
+    </linearGradient>
+  </defs>
+  <path d="M20 22 L58 44 L20 66 Z" fill="url(#g)" stroke="url(#g)" stroke-width="8" stroke-linejoin="round"/>
+  <text x="80" y="58" font-family="Inter, 'Segoe UI', sans-serif" font-weight="700" font-size="42" letter-spacing="-1" fill="#ffffff">Seerr<tspan fill="url(#tg)">Play</tspan></text>
+</svg>
