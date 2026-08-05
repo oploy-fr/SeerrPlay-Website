@@ -24,6 +24,27 @@ const PROMPTS: Record<Exclude<Language, "en">, { flag: string; question: string;
 };
 
 const DISMISS_KEY = "seerrplay-lang-prompt-dismissed";
+const EXPLICIT_KEY = "seerrplay-lang-explicit";
+
+/**
+ * Suggestion from the browser language — instant, no network call, and not
+ * blocked by ad blockers (unlike geo-IP APIs). Returns null when the browser
+ * prefers English or no supported language.
+ */
+function browserSuggestion(): Exclude<Language, "en"> | null {
+  const raw = navigator.languages?.length ? navigator.languages : [navigator.language];
+  for (const entry of raw) {
+    const code = (entry || "").slice(0, 2).toLowerCase();
+    if (!code) continue;
+    // English is preferred over everything below: the site is already in the
+    // right language for this visitor, suggest nothing.
+    if (code === "en") return null;
+    if ((SUPPORTED_LANGUAGES as readonly string[]).includes(code)) {
+      return code as Exclude<Language, "en">;
+    }
+  }
+  return null;
+}
 
 async function detectCountry(): Promise<string | null> {
   const controller = new AbortController();
@@ -41,21 +62,33 @@ async function detectCountry(): Promise<string | null> {
 }
 
 /**
- * Language suggestion banner based on IP geolocation.
+ * Language suggestion banner.
  * Only shown when the user has never picked a language, the site is displayed
- * in English, and their country speaks an available language (≠ English).
+ * in English, and an available language (≠ English) matches. Detection uses
+ * the browser language first, with IP geolocation as a silent fallback for
+ * English browsers located in a supported country.
  */
 export function GeoLanguagePrompt() {
   const { i18n } = useTranslation();
   const [suggested, setSuggested] = useState<Exclude<Language, "en"> | null>(null);
 
   useEffect(() => {
-    // Explicit choice already stored, banner already dismissed, or site already
-    // displayed in a non-English language → nothing to suggest.
-    if (localStorage.getItem("seerrplay-lang")) return;
+    // Explicit choice already made (the detector cache "seerrplay-lang" cannot
+    // be used for this: it also stores the implicit "en" fallback on first
+    // load). Banner already dismissed, or site already displayed in a
+    // non-English language → nothing to suggest.
+    if (localStorage.getItem(EXPLICIT_KEY)) return;
     if (localStorage.getItem(DISMISS_KEY)) return;
     if (currentLanguage() !== "en") return;
 
+    // 1) Browser language — instant and reliable.
+    const fromBrowser = browserSuggestion();
+    if (fromBrowser) {
+      setSuggested(fromBrowser);
+      return;
+    }
+
+    // 2) Fallback: IP geolocation (may be blocked by ad blockers — fail silently).
     let cancelled = false;
     void detectCountry().then((country) => {
       if (cancelled || !country) return;
@@ -77,6 +110,7 @@ export function GeoLanguagePrompt() {
   const prompt = PROMPTS[suggested];
 
   const accept = () => {
+    localStorage.setItem(EXPLICIT_KEY, "1");
     void i18n.changeLanguage(suggested); // persisted via the detector
     setSuggested(null);
   };

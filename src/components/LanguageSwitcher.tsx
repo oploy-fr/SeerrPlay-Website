@@ -62,6 +62,10 @@ export function LanguageSwitcher({ className }: { className?: string }) {
                 role="option"
                 aria-selected={lng === active}
                 onClick={() => {
+                  // Explicit user choice: mark it so the suggestion banner
+                  // stays hidden (the detector cache alone cannot be trusted,
+                  // it also stores the implicit "en" fallback).
+                  localStorage.setItem("seerrplay-lang-explicit", "1");
                   void i18n.changeLanguage(lng);
                   setOpen(false);
                 }}
